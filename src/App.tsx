@@ -11,10 +11,12 @@ function App() {
       <MantineProvider>
         <BrowserRouter>
           <Navbar />
-          <Routes>
-            <Route path={"/"} element={<Paws />} />
-            <Route path={"/cart"} element={<Cart />} />
-          </Routes>
+          <div className="p-5">
+            <Routes>
+              <Route path={"/"} element={<Paws />} />
+              <Route path={"/cart"} element={<Cart />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </MantineProvider>
     </>
