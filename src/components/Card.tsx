@@ -1,84 +1,46 @@
-import { Card, Image, Text, Button, Group, Loader } from "@mantine/core";
+// CardPage.tsx
+
 import { useEffect, useState } from "react";
-
-const BASE_URL = "https://dog.ceo/api/breeds/image/random";
-
-interface Pet {
-  message: string;
-  status: string;
-}
+import PetCard from "./Pet";
+import ErrorComponent from "./Error";
+import { Loader } from "@mantine/core";
+import { Pet } from "./Pet";
+import { fetchPets } from "../services/api/api";
 
 const CardPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [pets, setPets] = useState<Pet[]>([]);
 
   useEffect(() => {
-    const fetchPets = async () => {
+    const fetchData = async () => {
       try {
-        const petsData = [];
-        for (let i = 0; i < 10; i++) {
-          const response = await fetch(BASE_URL);
-          const data = await response.json();
-          petsData.push(data);
-        }
+        const petsData = await fetchPets();
         setPets(petsData);
         setLoading(false);
-      } catch (error) {
+      } catch (error: unknown) {
         setLoading(false);
-        alert("Oops, there was an error fetching the pets! Please try again.");
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(String(error));
+        }
       }
     };
 
-    fetchPets();
+    fetchData();
   }, []);
 
   return (
     <div className="grid grid-cols-2 gap-8 mx-auto">
       {loading ? (
         <Loader size="lg" />
+      ) : error ? (
+        <ErrorComponent message={error} />
       ) : (
-        pets.map((pet, index) => {
-          const formatBreedName = pet.message.split("/")[4];
-          const breedName = formatBreedName
-            .split("-")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
-
-          return (
-            <Card
-              className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300"
-              key={index}
-              shadow="sm"
-              padding="lg"
-              radius="md"
-              withBorder
-            >
-              <Card.Section>
-                <Image
-                  className="w-full h-[250px] object-cover"
-                  width={250}
-                  height={250}
-                  src={pet.message}
-                />
-              </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>{breedName}</Text>
-              </Group>
-
-              <Text size="sm" c="dimmed">
-                <Text size="sm" c="dimmed">
-                  Woof, Woof! I'm ready for a new home and plenty of adventures.
-                  Everyone needs a tail-wagging buddy!
-                </Text>
-              </Text>
-
-              <Button color="blue" fullWidth mt="md" radius="md">
-                Adopt me
-              </Button>
-            </Card>
-          );
-        })
+        pets.map((pet, index) => (
+          <PetCard key={index} pet={pet} index={index} />
+        ))
       )}
     </div>
   );

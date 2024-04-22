@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Paws from "./pages/Paws";
-import Cart from "./pages/Cart";
-import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
+import HomePage from "./pages/Home";
+import CartPage from "./pages/Cart";
+import "@mantine/core/styles.css";
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
           <Navbar />
           <div className="p-5">
             <Routes>
-              <Route path={"/"} element={<Paws />} />
-              <Route path={"/cart"} element={<Cart />} />
+              <Route path={"/"} element={<HomePage />} />
+              <Route path={"/cart"} element={<CartPage />} />
             </Routes>
           </div>
         </BrowserRouter>
