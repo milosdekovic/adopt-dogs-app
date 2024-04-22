@@ -17,15 +17,14 @@ const CardPage = () => {
       try {
         const petsData = [];
         for (let i = 0; i < 10; i++) {
-          // Change this number to fetch the number of pets you want
           const response = await fetch(BASE_URL);
           const data = await response.json();
           petsData.push(data);
         }
         setPets(petsData);
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false);
       } catch (error) {
-        setLoading(false); // Set loading to false if there's an error
+        setLoading(false);
         alert("Oops, there was an error fetching the pets! Please try again.");
       }
     };
@@ -35,12 +34,12 @@ const CardPage = () => {
 
   return (
     <div className="grid grid-cols-2 gap-8 mx-auto">
-      {loading ? ( // If loading is true, display the spinner
+      {loading ? (
         <Loader size="lg" />
       ) : (
         pets.map((pet, index) => {
-          const breedName = pet.message.split("/")[4]; // Extract breed name from image URL
-          const formatBreedName = breedName
+          const formatBreedName = pet.message.split("/")[4];
+          const breedName = formatBreedName
             .split("-")
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
@@ -64,17 +63,18 @@ const CardPage = () => {
               </Card.Section>
 
               <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>{formatBreedName}</Text>
-                {/* Display the breed name */}
+                <Text fw={500}>{breedName}</Text>
               </Group>
 
               <Text size="sm" c="dimmed">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga,
-                itaque.
+                <Text size="sm" c="dimmed">
+                  Woof, Woof! I'm ready for a new home and plenty of adventures.
+                  Everyone needs a tail-wagging buddy!
+                </Text>
               </Text>
 
               <Button color="blue" fullWidth mt="md" radius="md">
-                Adopt
+                Adopt me
               </Button>
             </Card>
           );
