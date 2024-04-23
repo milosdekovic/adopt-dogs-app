@@ -99,11 +99,14 @@ const AdoptationCart = () => {
         </div>
       </Drawer>
       <Button
-        className="pb-2 grid justify-items-center "
+        className="pb-2 self-center "
         variant="transparent"
         onClick={open}
       >
-        <IconPawFilled size={35} className="text-white h-[35px]" />
+        <IconPawFilled
+          size={35}
+          className="text-white h-[25px] items-center lg:h-[35px]"
+        />
         <div className="absolute bottom-0 left-5 top-[33%]">
           {cartQuantity > 0 ? (
             <Indicator

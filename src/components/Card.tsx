@@ -38,7 +38,7 @@ const CardPage = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-2 gap-8 mx-auto">
+    <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mx-auto">
       {loading ? (
         <Loader size="lg" />
       ) : error ? (
