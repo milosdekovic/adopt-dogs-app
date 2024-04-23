@@ -2,23 +2,24 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { MantineProvider } from "@mantine/core";
 import HomePage from "./pages/Home";
-import CartPage from "./pages/Cart";
 import "@mantine/core/styles.css";
+import { AdoptationProvider } from "./context/AdoptationContext";
 
 function App() {
   return (
     <>
-      <MantineProvider>
-        <BrowserRouter>
-          <Navbar />
-          <div className="p-5">
-            <Routes>
-              <Route path={"/"} element={<HomePage />} />
-              <Route path={"/cart"} element={<CartPage />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </MantineProvider>
+      <AdoptationProvider>
+        <MantineProvider>
+          <BrowserRouter>
+            <Navbar />
+            <div className="p-5 max-w-3xl mx-auto">
+              <Routes>
+                <Route path={"/"} element={<HomePage />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </MantineProvider>
+      </AdoptationProvider>
     </>
   );
 }

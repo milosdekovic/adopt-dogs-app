@@ -1,5 +1,3 @@
-// services/api/api.ts
-
 const BASE_URL = "https://dog.ceo/api/breeds/image/random";
 
 export const fetchPets = async () => {

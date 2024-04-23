@@ -1,5 +1,3 @@
-// CardPage.tsx
-
 import { useEffect, useState } from "react";
 import PetCard from "./Pet";
 import ErrorComponent from "./Error";
@@ -13,26 +11,34 @@ const CardPage = () => {
   const [pets, setPets] = useState<Pet[]>([]);
 
   useEffect(() => {
+    // Define an asynchronous function to fetch data
     const fetchData = async () => {
       try {
-        const petsData = await fetchPets();
-        setPets(petsData);
-        setLoading(false);
+        // Start loading data
+        setLoading(true);
+
+        // Fetch data from the API
+        const data = await fetchPets();
+
+        // Update the state with the fetched data
+        setPets(data);
       } catch (error: unknown) {
+        // If an error occurs, convert it to a string and update the error state
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        setError(errorMessage);
+      } finally {
+        // Whether the fetch succeeded or failed, stop loading
         setLoading(false);
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError(String(error));
-        }
       }
     };
 
+    // Call the fetchData function
     fetchData();
-  }, []);
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div className="grid grid-cols-2 gap-8 mx-auto">
+    <div className="grid lg:grid-cols-2 grid-cols-2 gap-8 mx-auto">
       {loading ? (
         <Loader size="lg" />
       ) : error ? (

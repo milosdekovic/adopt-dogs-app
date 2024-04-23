@@ -1,4 +1,6 @@
 import { Card, Image, Text, Button, Group } from "@mantine/core";
+import { useAdoptation } from "../context/AdoptationContext";
+import { IconMinus } from "@tabler/icons-react";
 
 export interface Pet {
   message: string;
@@ -17,26 +19,29 @@ const PetCard = ({ pet, index }: PetCardProps) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
+  const { getQuantity, increaseQuantity, decreaseQuantity } = useAdoptation();
+  const quantity = getQuantity(index);
   return (
     <Card
-      className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300"
+      className="transition bg-[#242424] ease-in-out delay-350 hover:scale-105 duration-500"
       key={index}
       shadow="sm"
       padding="lg"
       radius="md"
-      withBorder
     >
       <Card.Section>
         <Image
-          className="w-full h-[250px] object-cover"
-          width={250}
+          className="w-full h-[300px] object-cover"
+          width={300}
           height={250}
           src={pet.message}
         />
       </Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">
-        <Text fw={500}>{breedName}</Text>
+        <Text className="text-white" fw={500}>
+          {breedName}
+        </Text>
       </Group>
 
       <Text size="sm" c="dimmed">
@@ -44,9 +49,30 @@ const PetCard = ({ pet, index }: PetCardProps) => {
         needs a tail-wagging buddy!
       </Text>
 
-      <Button color="blue" fullWidth mt="md" radius="md">
-        Adopt me
-      </Button>
+      {quantity === 0 ? (
+        <div className="flex justify-start">
+          <Button
+            onClick={() => increaseQuantity(index, pet)}
+            color="blue"
+            mt="md"
+            radius="md"
+          >
+            Adopt me
+          </Button>
+        </div>
+      ) : (
+        <div className="flex justify-start mt-5">
+          <Button
+            onClick={() => decreaseQuantity(index)}
+            variant="filled"
+            color="red"
+            size="xs"
+            radius="lg"
+          >
+            <IconMinus />
+          </Button>
+        </div>
+      )}
     </Card>
   );
 };
