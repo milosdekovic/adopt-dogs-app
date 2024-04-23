@@ -35,11 +35,12 @@ const PetCard = ({ pet, index }: PetCardProps) => {
           width={300}
           height={250}
           src={pet.message}
+          alt="doggo"
         />
       </Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">
-        <Text className="text-white" fw={500}>
+        <Text className="text-white text-2xl" fw={600}>
           {breedName}
         </Text>
       </Group>
@@ -52,8 +53,10 @@ const PetCard = ({ pet, index }: PetCardProps) => {
       {quantity === 0 ? (
         <div className="flex justify-start">
           <Button
+            className="text-black"
             onClick={() => increaseQuantity(index, pet)}
-            color="blue"
+            variant="white"
+            color="black"
             mt="md"
             radius="md"
           >
@@ -63,6 +66,7 @@ const PetCard = ({ pet, index }: PetCardProps) => {
       ) : (
         <div className="flex justify-start mt-5">
           <Button
+            className="w-[45px]"
             onClick={() => decreaseQuantity(index)}
             variant="filled"
             color="red"

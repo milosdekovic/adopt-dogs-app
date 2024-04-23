@@ -9,14 +9,17 @@ const AdoptationCart = () => {
   const { cartQuantity, getCartItems, removeFromCart, clearCart } =
     useAdoptation();
   const cartItems = getCartItems();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("You have not rescued a doggo yet 😞");
 
   return (
     <div>
       <Drawer
         opened={opened}
         position="right"
-        onClose={close}
+        onClose={() => {
+          close();
+          setMessage("You have not rescued a doggo yet 😞");
+        }}
         overlayProps={{ backgroundOpacity: 0.8 }}
       >
         <h1 className="font-bold text-2xl mb-1">Your doggos: </h1>
@@ -50,6 +53,7 @@ const AdoptationCart = () => {
                       </div>{" "}
                       <div className="my-auto">
                         <Button
+                          className="w-[45px]"
                           onClick={() => removeFromCart(item.index)}
                           variant="filled"
                           color="red"
@@ -66,17 +70,7 @@ const AdoptationCart = () => {
               <Divider />
               <div className="flex justify-between">
                 <Button
-                  color="blue"
-                  radius="md"
-                  onClick={() => {
-                    clearCart();
-                    setMessage("You have not rescued a doggo yet 😞");
-                  }}
-                >
-                  Cancel adoption
-                </Button>
-                <Button
-                  color="green"
+                  color="#1F1F1F"
                   radius="md"
                   onClick={() => {
                     clearCart();
@@ -85,7 +79,17 @@ const AdoptationCart = () => {
                     );
                   }}
                 >
-                  Confirm adoption
+                  Adopt {cartQuantity} doggo(s)
+                </Button>
+                <Button
+                  color="#1F1F1F"
+                  radius="md"
+                  onClick={() => {
+                    clearCart();
+                    setMessage("You have not rescued a doggo yet 😞");
+                  }}
+                >
+                  Remove all
                 </Button>
               </div>
             </div>
@@ -99,7 +103,7 @@ const AdoptationCart = () => {
         variant="transparent"
         onClick={open}
       >
-        <IconPawFilled size={"4xl"} className="text-white h-[35px]" />
+        <IconPawFilled size={35} className="text-white h-[35px]" />
         <div className="absolute bottom-0 left-5 top-[33%]">
           {cartQuantity > 0 ? (
             <Indicator
