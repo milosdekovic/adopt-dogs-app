@@ -37,7 +37,7 @@ const HomePage = () => {
   }, []); // Empty dependency array means this effect runs once on mount
   return (
     <div className="grid container gap-5 mx-auto mt-0 lg:mt-5 mb-5">
-      <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 lg:gap-10 mx-auto">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-8 lg:gap-10 mx-auto">
         {loading ? (
           <Loader size="lg" />
         ) : error ? (
