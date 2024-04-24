@@ -1,7 +1,6 @@
 import { Card, Image, Text, Button, Group } from "@mantine/core";
 import { useAdoptation } from "../context/AdoptationContext";
 import { IconMinus } from "@tabler/icons-react";
-
 export interface Pet {
   message: string;
   status: string;
@@ -18,7 +17,6 @@ const PetCard = ({ pet, index }: PetCardProps) => {
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
-
   const { getQuantity, increaseQuantity, decreaseQuantity } = useAdoptation();
   const quantity = getQuantity(index);
   return (
@@ -38,18 +36,15 @@ const PetCard = ({ pet, index }: PetCardProps) => {
           alt="doggo"
         />
       </Card.Section>
-
       <Group justify="space-between" mt="md" mb="xs">
-        <Text className="text-white text-2xl" fw={600}>
+        <Text className="text-white text-xl lg:text-2xl" fw={600}>
           {breedName}
         </Text>
       </Group>
-
       <Text size="sm" c="dimmed">
         Woof, Woof! I'm ready for a new home and plenty of adventures. Everyone
         needs a tail-wagging buddy!
       </Text>
-
       {quantity === 0 ? (
         <div className="flex justify-start">
           <Button

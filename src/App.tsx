@@ -12,7 +12,7 @@ function App() {
         <MantineProvider>
           <BrowserRouter>
             <Navbar />
-            <div className="p-5 max-w-3xl mx-auto">
+            <div className="p-8 lg:p-5 max-w-3xl mx-auto">
               <Routes>
                 <Route path={"/"} element={<HomePage />} />
               </Routes>
