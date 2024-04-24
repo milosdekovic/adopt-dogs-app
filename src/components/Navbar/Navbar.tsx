@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import AdoptationCart from "./AdoptationCart";
+import AdoptationCart from "../Cart/AdoptationCart";
 
 const Navbar = () => {
   return (

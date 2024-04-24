@@ -1,18 +1,19 @@
 import { Card, Image, Text, Button, Group } from "@mantine/core";
 import { useAdoptation } from "../context/AdoptationContext";
 import { IconMinus } from "@tabler/icons-react";
-export interface Pet {
+
+export interface Dog {
   message: string;
   status: string;
 }
 
-interface PetCardProps {
-  pet: Pet;
+interface DogCardProps {
+  dog: Dog;
   index: number;
 }
 
-const PetCard = ({ pet, index }: PetCardProps) => {
-  const formatBreedName = pet.message.split("/")[4];
+const DogCard = ({ dog: dog, index }: DogCardProps) => {
+  const formatBreedName = dog.message.split("/")[4];
   const breedName = formatBreedName
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -32,7 +33,7 @@ const PetCard = ({ pet, index }: PetCardProps) => {
           className="w-full h-[300px] object-cover"
           width={300}
           height={250}
-          src={pet.message}
+          src={dog.message}
           alt="doggo"
         />
       </Card.Section>
@@ -49,7 +50,7 @@ const PetCard = ({ pet, index }: PetCardProps) => {
         <div className="flex justify-start">
           <Button
             className="text-black"
-            onClick={() => increaseQuantity(index, pet)}
+            onClick={() => increaseQuantity(index, dog)}
             variant="white"
             color="black"
             mt="md"
@@ -76,4 +77,4 @@ const PetCard = ({ pet, index }: PetCardProps) => {
   );
 };
 
-export default PetCard;
+export default DogCard;

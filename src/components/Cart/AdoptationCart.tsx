@@ -1,38 +1,31 @@
 import { Button, Drawer, Indicator } from "@mantine/core";
 import { IconPawFilled } from "@tabler/icons-react";
-import { useAdoptation } from "../context/AdoptationContext";
+import { useAdoptation } from "../../context/AdoptationContext";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
 import CartItem from "./CartItem";
 
 const AdoptationCart = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const { cartQuantity } = useAdoptation();
-  const [, setMessage] = useState("You have not rescued a doggo yet 😞");
 
   return (
-    <div>
+    <>
       <Drawer
         opened={opened}
         position="right"
-        onClose={() => {
-          close();
-          setMessage("You have not rescued a doggo yet 😞");
-        }}
+        onClose={close}
         overlayProps={{ backgroundOpacity: 0.8 }}
       >
-        <div>
-          <CartItem />
-        </div>
+        <CartItem />
       </Drawer>
       <Button
-        className="pb-2 self-center "
+        className="pb-2 items-center"
         variant="transparent"
         onClick={open}
       >
         <IconPawFilled
           size={35}
-          className="text-white h-[25px] items-center lg:h-[35px]"
+          className="text-white h-[30px] lg:h-[35px] items-center"
         />
         <div className="absolute bottom-0 left-5 top-[33%]">
           {cartQuantity > 0 ? (
@@ -60,7 +53,7 @@ const AdoptationCart = () => {
           ) : null}
         </div>
       </Button>
-    </div>
+    </>
   );
 };
 

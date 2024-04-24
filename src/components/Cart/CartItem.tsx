@@ -1,6 +1,6 @@
 import { Button, Divider, Image } from "@mantine/core";
 import { IconMinus } from "@tabler/icons-react";
-import { useAdoptation } from "../context/AdoptationContext";
+import { useAdoptation } from "../../context/AdoptationContext";
 import { useState } from "react";
 
 const CartItem = () => {
@@ -17,7 +17,7 @@ const CartItem = () => {
         {cartQuantity > 0 ? (
           <div className="mt-5 grid gap-5">
             {cartItems.map((item, index) => {
-              const formatBreedName = item.pet.message.split("/")[4];
+              const formatBreedName = item.dog.message.split("/")[4];
               const breedName = formatBreedName
                 .split("-")
                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -29,7 +29,7 @@ const CartItem = () => {
                       <div className="flex gap-5 items-center">
                         <Image
                           className="min-w-[120px] rounded-lg"
-                          src={item.pet.message}
+                          src={item.dog.message}
                           style={{
                             objectFit: "cover",
                             width: "120px",

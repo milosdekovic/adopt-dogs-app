@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { Pet } from "../components/Pet";
+import { Dog } from "../components/DogCard";
 
 interface AdoptationProviderProps {
   children: ReactNode;
@@ -7,7 +7,7 @@ interface AdoptationProviderProps {
 
 interface AdoptationContextProps {
   getQuantity: (index: number) => number;
-  increaseQuantity: (index: number, pet: Pet) => void;
+  increaseQuantity: (index: number, dog: Dog) => void;
   decreaseQuantity: (index: number) => void;
   removeFromCart: (index: number) => void;
   cartQuantity: number;
@@ -18,7 +18,7 @@ interface AdoptationContextProps {
 interface CartItemProps {
   index: number;
   quantity: number;
-  pet: Pet;
+  dog: Dog;
 }
 
 const AdoptationContext = createContext({} as AdoptationContextProps);
@@ -38,14 +38,14 @@ export function AdoptationProvider({ children }: AdoptationProviderProps) {
     return cartItems;
   }
 
-  function increaseQuantity(index: number, pet: Pet) {
+  function increaseQuantity(index: number, dog: Dog) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.index === index) == null) {
-        return [...currItems, { index, quantity: 1, pet }]; // Include pet details here
+        return [...currItems, { index, quantity: 1, dog: dog }];
       } else {
         return currItems.map((item) =>
           item.index === index
-            ? { ...item, quantity: item.quantity + 1, pet } // Include pet details here
+            ? { ...item, quantity: item.quantity + 1, dog: dog }
             : item,
         );
       }
@@ -60,7 +60,7 @@ export function AdoptationProvider({ children }: AdoptationProviderProps) {
       } else {
         return currItems.map((item) =>
           item.index === index
-            ? { ...item, quantity: item.quantity - 1, pet: item.pet }
+            ? { ...item, quantity: item.quantity - 1, dog: item.dog }
             : item,
         );
       }

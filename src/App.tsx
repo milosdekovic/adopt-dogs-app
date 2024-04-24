@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import { MantineProvider } from "@mantine/core";
 import HomePage from "./pages/Home";
 import "@mantine/core/styles.css";
