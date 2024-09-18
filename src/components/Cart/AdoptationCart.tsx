@@ -22,6 +22,7 @@ const AdoptationCart = () => {
         className="pb-2 items-center"
         variant="transparent"
         onClick={open}
+        aria-label="Toggle cart adoption"
       >
         <IconPawFilled
           size={35}
